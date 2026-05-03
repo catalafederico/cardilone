@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cardilone Lomitería – Colombres 762, Lomas de Zamora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #c9a227;
+      --gold-light: #e8c96b;
+      --gold-dark: #8a6c10;
+      --red: #b01c1c;
+      --red-dark: #7a0e0e;
+      --green: #1a6b2e;
+      --green-light: #2a8f40;
+      --cream: #f5ead5;
+      --cream-dark: #e8d5b0;
+      --black: #0a0a0a;
+      --near-black: #111111;
+      --dark-bg: #130a00;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Libre Baskerville', Georgia, serif;
+      background: var(--dark-bg);
+      color: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: linear-gradient(180deg, rgba(10,5,0,0.97) 0%, rgba(10,5,0,0.8) 100%);
+      border-bottom: 2px solid var(--gold-dark);
+      backdrop-filter: blur(12px);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 54px;
+      width: 54px;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 8px rgba(201,162,39,0.45));
+      transition: filter 0.3s, transform 0.3s;
+    }
+
+    .nav-logo img:hover {
+      filter: drop-shadow(0 0 16px rgba(201,162,39,0.7));
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cream-dark);
+      text-decoration: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--black);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      padding: 0.6rem 1.4rem;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: opacity 0.3s, transform 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(176,28,28,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(26,107,46,0.1) 0%, transparent 50%),
+        linear-gradient(180deg, #0a0200 0%, #1a0800 40%, #0d0400 100%);
+    }
+
+    .hero-ornament {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(700px, 95vw);
+      height: min(700px, 95vw);
+      border-radius: 50%;
+      border: 1px solid rgba(201,162,39,0.08);
+      animation: rotateOrb 30s linear infinite;
+    }
+
+    .hero-ornament::before {
+      content: '';
+      position: absolute;
+      inset: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,162,39,0.06);
+    }
+
+    .hero-ornament::after {
+      content: '';
+      position: absolute;
+      inset: 40px;
+      border-radius: 50%;
+      border: 1px dashed rgba(201,162,39,0.04);
+    }
+
+    @keyframes rotateOrb { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+    .italian-flag-stripe {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--green) 33.3%, #fff 33.3% 66.6%, var(--red) 66.6%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 6rem 2rem 4rem;
+      animation: fadeUp 1.2s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-logo-img {
+      width: min(280px, 60vw);
+      height: min(280px, 60vw);
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 40px rgba(201,162,39,0.35));
+      margin-bottom: 2rem;
+      animation: pulseGlow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 30px rgba(201,162,39,0.3)); }
+      50%       { filter: drop-shadow(0 0 55px rgba(201,162,39,0.5)); }
+    }
+
+    .hero-tagline {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.65rem, 2vw, 0.8rem);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-weight: 900;
+      line-height: 1.05;
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--gold-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: var(--cream-dark);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-address {
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9rem;
+      color: rgba(245,234,213,0.55);
+      letter-spacing: 2px;
+      margin-bottom: 3rem;
+      font-style: italic;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--black);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+      clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201,162,39,0.35);
+    }
+
+    .btn-secondary {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: transparent;
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      border: 1px solid rgba(201,162,39,0.4);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(201,162,39,0.08);
+      border-color: var(--gold);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 2rem;
+      max-width: 900px;
+      margin: 0 auto 4rem;
+    }
+
+    .divider-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dark), transparent); }
+
+    .divider-icon {
+      font-size: 1.4rem;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 6rem 2rem; }
+
+    .section-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 700;
+      text-align: center;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--gold-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      text-align: center;
+      color: rgba(245,234,213,0.6);
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.8;
+      font-size: 0.95rem;
+    }
+
+    /* ── MENU ── */
+    #menu {
+      background: linear-gradient(180deg, var(--dark-bg) 0%, #1a0800 50%, var(--dark-bg) 100%);
+      position: relative;
+    }
+
+    #menu::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--green), #fff, var(--red));
+    }
+
+    .menu-filter {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--cream-dark);
+      background: transparent;
+      border: 1px solid rgba(201,162,39,0.25);
+      padding: 0.5rem 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+      border: 1px solid rgba(201,162,39,0.18);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      animation: fadeIn 0.6s ease backwards;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(201,162,39,0.5);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(201,162,39,0.08);
+    }
+
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), var(--gold), var(--green));
+    }
+
+    .card-city-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.55rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,162,39,0.3);
+      padding: 0.25rem 0.6rem;
+      background: rgba(10,5,0,0.7);
+    }
+
+    .card-body { padding: 1.8rem; }
+
+    .card-icon { font-size: 2.2rem; margin-bottom: 0.8rem; display: block; }
+
+    .card-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.9rem;
+      color: var(--gold-light);
+      margin-bottom: 0.3rem;
+      line-height: 1.2;
+    }
+
+    .card-city {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
+    }
+
+    .card-desc {
+      font-size: 0.85rem;
+      color: rgba(245,234,213,0.65);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    .card-ingredients {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .ingredient-tag {
+      font-size: 0.65rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.5px;
+      color: var(--cream-dark);
+      background: rgba(201,162,39,0.08);
+      border: 1px solid rgba(201,162,39,0.15);
+      padding: 0.2rem 0.6rem;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(201,162,39,0.1);
+      padding-top: 1.2rem;
+    }
+
+    .card-includes {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      color: rgba(245,234,213,0.4);
+      font-style: italic;
+    }
+
+    .include-chip {
+      background: rgba(201,162,39,0.05);
+      border: 1px solid rgba(201,162,39,0.1);
+      padding: 0.15rem 0.5rem;
+      border-radius: 1px;
+    }
+
+    .card-price {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.3rem;
+      color: var(--gold);
+    }
+
+    .card-price span {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      color: rgba(201,162,39,0.5);
+      vertical-align: super;
+    }
+
+    .card-wpp-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--black);
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      transition: opacity 0.3s, transform 0.2s;
+      border-radius: 1px;
+    }
+
+    .card-wpp-btn:hover { opacity: 0.85; transform: scale(1.02); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── NOSOTROS ── */
+    #nosotros {
+      background: linear-gradient(135deg, rgba(26,107,46,0.05) 0%, transparent 50%, rgba(176,28,28,0.05) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nosotros-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .nosotros-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .nosotros-logo-wrap {
+      position: relative;
+      width: 320px;
+      height: 320px;
+    }
+
+    .nosotros-logo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 50%;
+      filter: drop-shadow(0 0 30px rgba(201,162,39,0.2));
+    }
+
+    .nosotros-ring {
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,162,39,0.15);
+    }
+
+    .nosotros-ring::before {
+      content: '';
+      position: absolute;
+      inset: 10px;
+      border-radius: 50%;
+      border: 1px dashed rgba(201,162,39,0.08);
+    }
+
+    .nosotros-text {}
+
+    .nosotros-text p {
+      color: rgba(245,234,213,0.7);
+      line-height: 1.9;
+      font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .nosotros-text p em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .nosotros-values {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+    }
+
+    .value-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+    .value-text h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .value-text p {
+      font-size: 0.78rem;
+      color: rgba(245,234,213,0.5);
+      line-height: 1.5;
+      margin: 0;
+      font-style: normal;
+    }
+
+    .italian-stripe {
+      display: flex;
+      height: 4px;
+      margin: 2rem 0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .italian-stripe div { flex: 1; }
+    .italian-stripe .g { background: var(--green); }
+    .italian-stripe .w { background: #fff; }
+    .italian-stripe .r { background: var(--red); }
+
+    /* ── CONTACT ── */
+    #contacto {
+      background: linear-gradient(180deg, var(--dark-bg) 0%, #100500 100%);
+      position: relative;
+    }
+
+    #contacto::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--red), var(--gold), var(--green));
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contact-info h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+
+    .contact-item-text h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-item-text p, .contact-item-text a {
+      color: rgba(245,234,213,0.7);
+      font-size: 0.9rem;
+      text-decoration: none;
+      line-height: 1.6;
+    }
+
+    .contact-item-text a:hover { color: var(--gold); }
+
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: rgba(245,234,213,0.55);
+      border-bottom: 1px dotted rgba(201,162,39,0.1);
+      padding-bottom: 0.3rem;
+    }
+
+    .hours-row span:first-child { color: rgba(245,234,213,0.35); }
+
+    .contact-form-side h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group { margin-bottom: 1.2rem; }
+
+    .form-group label {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(201,162,39,0.6);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,162,39,0.2);
+      color: var(--cream);
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.88rem;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+
+    .form-group select option { background: #1a0800; color: var(--cream); }
+
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--gold);
+      background: rgba(201,162,39,0.04);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-submit {
+      width: 100%;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--black);
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      transition: opacity 0.3s, transform 0.2s;
+    }
+
+    .form-submit:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* ── MAP ── */
+    .map-section {
+      background: var(--near-black);
+      border-top: 1px solid rgba(201,162,39,0.1);
+    }
+
+    .map-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      border: 1px solid rgba(201,162,39,0.15);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 380px;
+      display: block;
+      filter: sepia(30%) saturate(70%);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #050200;
+      border-top: 1px solid rgba(201,162,39,0.12);
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .footer-logo {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-tagline {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(245,234,213,0.3);
+      margin-bottom: 2rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(245,234,213,0.3);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(245,234,213,0.2);
+      font-style: italic;
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .wpp-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 9000;
+      width: 62px;
+      height: 62px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 25px rgba(37,211,102,0.5);
+      text-decoration: none;
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: wppPulse 3s ease-in-out infinite;
+    }
+
+    .wpp-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 35px rgba(37,211,102,0.6);
+    }
+
+    .wpp-float svg { width: 32px; height: 32px; fill: #fff; }
+
+    @keyframes wppPulse {
+      0%, 100% { box-shadow: 0 6px 25px rgba(37,211,102,0.5); }
+      50%       { box-shadow: 0 6px 40px rgba(37,211,102,0.75), 0 0 0 10px rgba(37,211,102,0.08); }
+    }
+
+    .wpp-tooltip {
+      position: absolute;
+      right: 72px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #1a0800;
+      color: var(--cream);
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid rgba(201,162,39,0.2);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+
+    .wpp-float:hover .wpp-tooltip { opacity: 1; }
+
+    /* ── HAMBURGER MOBILE ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--gold);
+      transition: all 0.3s;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .nosotros-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .nosotros-visual { display: none; }
+
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .hours-grid { grid-template-columns: 1fr; }
+
+      .menu-grid { grid-template-columns: 1fr; }
+
+      section { padding: 4rem 1.2rem; }
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 9990;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: #1a0800;
+      border: 1px solid var(--gold-dark);
+      max-width: 500px;
+      width: 100%;
+      padding: 2.5rem;
+      position: relative;
+      animation: fadeUp 0.4s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+
+    .modal-city {
+      font-family: 'Cinzel', serif;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+    }
+
+    .modal-body {
+      font-size: 0.88rem;
+      color: rgba(245,234,213,0.7);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-wpp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      padding: 1rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    .modal-wpp:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    <img src="logo-cardilone.jpg" alt="Cardilone Lomitería" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/5491100000000" target="_blank" class="nav-cta" id="nav-wpp">Pedir por WhatsApp</a>
+  <button class="hamburger" onclick="toggleMenu()" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ornament"></div>
+  <div class="italian-flag-stripe"></div>
+  <div class="hero-content">
+    <img src="logo-cardilone.jpg" alt="Cardilone Logo" class="hero-logo-img" />
+    <p class="hero-tagline">Auténtica Lomitería Italiana</p>
+    <h1 class="hero-title">Cardilone</h1>
+    <p class="hero-subtitle">Lomitería</p>
+    <p class="hero-address">📍 Colombres 762 · Lomas de Zamora · Buenos Aires</p>
+    <div class="hero-cta-group">
+      <a href="#menu" class="btn-primary">Ver Menú</a>
+      <a href="https://wa.me/5491100000000?text=¡Hola!%20Quiero%20hacer%20un%20pedido" target="_blank" class="btn-secondary">Pedir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU ── -->
+<section id="menu">
+  <p class="section-label reveal">— Carta —</p>
+  <h2 class="section-title reveal">Nuestros Combos</h2>
+  <p class="section-desc reveal">Cada combo lleva el nombre de una ciudad italiana que lo inspiró. Todos incluyen papas fritas y gaseosa a elección.</p>
+
+  <div class="menu-filter reveal">
+    <button class="filter-btn active" onclick="filterMenu('all', this)">Todos</button>
+    <button class="filter-btn" onclick="filterMenu('clasico', this)">Clásicos</button>
+    <button class="filter-btn" onclick="filterMenu('especial', this)">Especiales</button>
+    <button class="filter-btn" onclick="filterMenu('doble', this)">Dobles</button>
+  </div>
+
+  <div class="menu-grid" id="menuGrid">
+    <!-- Cards generadas por JS -->
+  </div>
+</section>
+
+<!-- ── NOSOTROS ── -->
+<section id="nosotros">
+  <p class="section-label reveal">— Chi Siamo —</p>
+  <h2 class="section-title reveal">Quiénes Somos</h2>
+  <div class="nosotros-inner">
+    <div class="nosotros-visual reveal">
+      <div class="nosotros-logo-wrap">
+        <img src="logo-cardilone.jpg" alt="Cardilone" onerror="this.style.display='none'"/>
+        <div class="nosotros-ring"></div>
+      </div>
+    </div>
+    <div class="nosotros-text reveal">
+      <div class="italian-stripe"><div class="g"></div><div class="w"></div><div class="r"></div></div>
+      <p>
+        <em>Cardilone</em> nació del sueño de una familia con raíces italianas que quiso traer a Lomas de Zamora la calidez de los sabores de la nonna, fusionados con la inconfundible identidad de la lomitería argentina.
+      </p>
+      <p>
+        Cada lomo que sale de nuestra cocina es una declaración de amor a la buena mesa: ingredientes frescos, pan crocante, y combinaciones inspiradas en las grandes ciudades de Italia —Roma, Milán, Napoli, Florencia— con el corazón puesto en cada mordida.
+      </p>
+      <p>
+        Nos encontrás en Colombres 762, Lomas de Zamora. Un lugar de barrio, con ambiente familiar, donde el aroma a carne a la plancha y el sonido del aceite caliente son sinónimos de casa.
+      </p>
+      <div class="nosotros-values">
+        <div class="value-item">
+          <span class="value-icon">🫒</span>
+          <div class="value-text">
+            <h4>Ingredientes Frescos</h4>
+            <p>Selección diaria de los mejores productos del mercado.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-icon">🇮🇹</span>
+          <div class="value-text">
+            <h4>Herencia Italiana</h4>
+            <p>Recetas y sabores con alma mediterránea.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-icon">🔥</span>
+          <div class="value-text">
+            <h4>Cocina al Momento</h4>
+            <p>Todo se prepara a pedido, recién hecho y caliente.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-icon">🏘️</span>
+          <div class="value-text">
+            <h4>Espíritu de Barrio</h4>
+            <p>Un local familiar donde todos son bienvenidos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACTO ── -->
+<section id="contacto">
+  <p class="section-label reveal">— Contatto —</p>
+  <h2 class="section-title reveal">Contacto</h2>
+  <p class="section-desc reveal">Encontranos en el barrio, escribinos o simplemente pasá a buscar tu pedido.</p>
+
+  <div class="contact-grid">
+    <div class="contact-info reveal">
+      <h3>Dónde Estamos</h3>
+
+      <div class="contact-item">
+        <span class="contact-item-icon">📍</span>
+        <div class="contact-item-text">
+          <h4>Dirección</h4>
+          <p>Colombres 762<br>Lomas de Zamora, Buenos Aires</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-icon">📱</span>
+        <div class="contact-item-text">
+          <h4>WhatsApp / Teléfono</h4>
+          <a href="https://wa.me/5491100000000" target="_blank">+54 9 11 0000-0000</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-icon">🕐</span>
+        <div class="contact-item-text">
+          <h4>Horarios</h4>
+          <div class="hours-grid">
+            <div class="hours-row"><span>Lun – Vie</span><span>12:00 – 00:00</span></div>
+            <div class="hours-row"><span>Sábados</span><span>12:00 – 01:00</span></div>
+            <div class="hours-row"><span>Domingos</span><span>12:00 – 00:00</span></div>
+            <div class="hours-row"><span>Feriados</span><span>13:00 – 23:00</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <span class="contact-item-icon">🛵</span>
+        <div class="contact-item-text">
+          <h4>Delivery</h4>
+          <p>Pedí por WhatsApp y te llevamos a domicilio en la zona.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-side reveal">
+      <h3>Envianos un Mensaje</h3>
+      <form onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="fname">Nombre</label>
+          <input type="text" id="fname" placeholder="Tu nombre" required>
+        </div>
+        <div class="form-group">
+          <label for="fphone">Teléfono / WhatsApp</label>
+          <input type="tel" id="fphone" placeholder="11 0000-0000">
+        </div>
+        <div class="form-group">
+          <label for="fsubject">Asunto</label>
+          <select id="fsubject">
+            <option value="">Seleccioná...</option>
+            <option>Consulta sobre el menú</option>
+            <option>Reserva / Evento</option>
+            <option>Consulta de delivery</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="fmsg">Mensaje</label>
+          <textarea id="fmsg" placeholder="Tu mensaje..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Enviar por WhatsApp</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── MAPA ── -->
+<div class="map-section">
+  <div style="max-width:1000px;margin:0 auto;padding:0 2rem 4rem;">
+    <div class="map-wrapper">
+      <iframe
+        src="https://maps.google.com/maps?q=Colombres+762,+Lomas+de+Zamora,+Buenos+Aires&output=embed"
+        allowfullscreen
+        loading="lazy"
+        title="Cardilone Lomitería – Mapa"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Cardilone</div>
+  <p class="footer-tagline">Lomitería · Colombres 762 · Lomas de Zamora</p>
+  <div class="italian-stripe" style="max-width:200px;margin:0 auto 2rem;"><div class="g"></div><div class="w"></div><div class="r"></div></div>
+  <ul class="footer-links">
+    <li><a href="#hero">Inicio</a></li>
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#nosotros">Nosotros</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Cardilone Lomitería · Hecho con ❤️ y mucho lomo</p>
+</footer>
+
+<!-- ── WHATSAPP FLOAT ── -->
+<a href="https://wa.me/5491100000000?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20en%20Cardilone" target="_blank" class="wpp-float" aria-label="Contactar por WhatsApp">
+  <span class="wpp-tooltip">Pedí por WhatsApp</span>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-city" id="modalCity"></div>
+    <div class="modal-body" id="modalBody"></div>
+    <a href="#" class="modal-wpp" id="modalWpp" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Pedir este combo
+    </a>
+  </div>
+</div>
+
+<script>
+  // ── MENU DATA ──
+  const WPP_NUMBER = '5491100000000'; // ← Reemplazá con el número real
+
+  const menuItems = [
+    {
+      id: 1, category: 'clasico',
+      name: 'Roma', city: 'Roma', icon: '🏛️',
+      desc: 'El clásico que nunca falla. Lomo tierno a la plancha con los sabores más puros de la tradición italiana.',
+      ingredients: ['Lomo', 'Jamón', 'Queso Mozzarella', 'Lechuga', 'Tomate', 'Mayonesa'],
+      price: '4.800'
+    },
+    {
+      id: 2, category: 'clasico',
+      name: 'Milano', city: 'Milán', icon: '🎭',
+      desc: 'La elegancia milanesa en cada mordida. Con muzzarella derretida y aceitunas negras.',
+      ingredients: ['Lomo', 'Muzzarella', 'Aceitunas', 'Rúcula', 'Tomate Cherry', 'Pesto'],
+      price: '5.200'
+    },
+    {
+      id: 3, category: 'especial',
+      name: 'Napoli', city: 'Nápoles', icon: '🌋',
+      desc: 'Picante y apasionado como el Vesubio. Con salsa de tomate artesanal y ají triturado.',
+      ingredients: ['Lomo', 'Salsa Napolitana', 'Ají Triturado', 'Cebolla Caramelizada', 'Pimiento Rojo', 'Provolone'],
+      price: '5.500'
+    },
+    {
+      id: 4, category: 'especial',
+      name: 'Firenze', city: 'Florencia', icon: '🌿',
+      desc: 'Refinado como el arte florentino. Albahaca fresca, tomates secos y aceite de oliva.',
+      ingredients: ['Lomo', 'Tomates Secos', 'Albahaca Fresca', 'Muzzarella', 'Aceite de Oliva', 'Ajo Tostado'],
+      price: '5.400'
+    },
+    {
+      id: 5, category: 'doble',
+      name: 'Venezia', city: 'Venecia', icon: '🚣',
+      desc: 'Doble ración para los más exigentes. Dos lomos con todo el esplendor veneciano.',
+      ingredients: ['Doble Lomo', 'Jamón Cocido', 'Queso Brie', 'Espinaca Salteada', 'Mostaza Antigua', 'Tomate'],
+      price: '7.200'
+    },
+    {
+      id: 6, category: 'doble',
+      name: 'Torino', city: 'Turín', icon: '⚙️',
+      desc: 'Potente y robusto como el norte italiano. Doble lomo con salsa agridulce y panceta crocante.',
+      ingredients: ['Doble Lomo', 'Panceta Crocante', 'Cheddar', 'Cebolla Crispy', 'Salsa Agridulce', 'Pepino Encurtido'],
+      price: '7.500'
+    },
+    {
+      id: 7, category: 'clasico',
+      name: 'Genova', city: 'Génova', icon: '⚓',
+      desc: 'Inspirado en el puerto histórico. Fresco, liviano y lleno de sabor mediterráneo.',
+      ingredients: ['Lomo', 'Rúcula', 'Parmesano', 'Limón', 'Alcaparras', 'Aceite de Oliva'],
+      price: '4.900'
+    },
+    {
+      id: 8, category: 'especial',
+      name: 'Sicilia', city: 'Sicilia', icon: '🍋',
+      desc: 'La isla más especiada de Italia. Con berenjenas asadas, queso pecorino y hierbas silvestres.',
+      ingredients: ['Lomo', 'Berenjenas Asadas', 'Pecorino', 'Hierbas Aromáticas', 'Tomate Concassé', 'Chile Suave'],
+      price: '5.600'
+    },
+    {
+      id: 9, category: 'doble',
+      name: 'Bologna', city: 'Bolonia', icon: '🍝',
+      desc: 'La capital gastronómica italiana, en versión lomo doble. Rica, generosa e imperdible.',
+      ingredients: ['Doble Lomo', 'Jamón de Parma', 'Queso Grana', 'Rúcula Salvaje', 'Tomate Fresco', 'Salsa Rosa'],
+      price: '7.800'
+    },
+  ];
+
+  function buildCard(item) {
+    const wppMsg = encodeURIComponent(`¡Hola! Quiero pedir el combo ${item.name} (${item.city}). ¿Pueden confirmarme disponibilidad y precio?`);
+    return `
+      <div class="menu-card" data-category="${item.category}" style="animation-delay:${(item.id % 4) * 0.1}s" onclick="openModal(${item.id})">
+        <div class="card-city-badge">${item.city}</div>
+        <div class="card-body">
+          <span class="card-icon">${item.icon}</span>
+          <div class="card-name">${item.name}</div>
+          <div class="card-city">Ciudad: ${item.city}</div>
+          <p class="card-desc">${item.desc}</p>
+          <div class="card-ingredients">
+            ${item.ingredients.map(i => `<span class="ingredient-tag">${i}</span>`).join('')}
+          </div>
+          <div class="card-footer">
+            <div>
+              <div class="card-includes">
+                <span class="include-chip">🍟 Papas</span>
+                <span class="include-chip">🥤 Gaseosa</span>
+              </div>
+            </div>
+            <div class="card-price"><span>$</span>${item.price}</div>
+          </div>
+          <div style="margin-top:1rem;">
+            <a href="https://wa.me/${WPP_NUMBER}?text=${wppMsg}" target="_blank" class="card-wpp-btn" onclick="event.stopPropagation()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Pedir combo
+            </a>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderMenu(filter) {
+    const grid = document.getElementById('menuGrid');
+    const items = filter === 'all' ? menuItems : menuItems.filter(i => i.category === filter);
+    grid.innerHTML = items.map(buildCard).join('');
+  }
+
+  function filterMenu(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMenu(cat);
+  }
+
+  // Modal
+  function openModal(id) {
+    const item = menuItems.find(i => i.id === id);
+    if (!item) return;
+    document.getElementById('modalTitle').textContent = item.name;
+    document.getElementById('modalCity').textContent = `Ciudad: ${item.city}`;
+    document.getElementById('modalBody').innerHTML = `
+      <p style="margin-bottom:1rem;">${item.desc}</p>
+      <p style="margin-bottom:0.5rem;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(201,162,39,0.6);">Ingredientes</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;">${item.ingredients.map(i=>`<span style="background:rgba(201,162,39,0.08);border:1px solid rgba(201,162,39,0.15);padding:0.2rem 0.6rem;font-size:0.7rem;font-family:'Cinzel',serif;">${i}</span>`).join('')}</div>
+      <div style="display:flex;gap:0.6rem;margin-bottom:1rem;"><span style="background:rgba(201,162,39,0.05);border:1px solid rgba(201,162,39,0.1);padding:0.2rem 0.8rem;font-size:0.75rem;">🍟 Papas incluidas</span><span style="background:rgba(201,162,39,0.05);border:1px solid rgba(201,162,39,0.1);padding:0.2rem 0.8rem;font-size:0.75rem;">🥤 Gaseosa incluida</span></div>
+      <p style="font-family:'Cinzel Decorative',serif;font-size:1.5rem;color:var(--gold);">$${item.price}</p>
+    `;
+    const msg = encodeURIComponent(`¡Hola! Quiero pedir el combo ${item.name} (${item.city}). ¿Pueden confirmarme disponibilidad?`);
+    document.getElementById('modalWpp').href = `https://wa.me/${WPP_NUMBER}?text=${msg}`;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal')) closeModal();
+  }
+
+  // Form → WhatsApp
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const name    = document.getElementById('fname').value;
+    const phone   = document.getElementById('fphone').value;
+    const subject = document.getElementById('fsubject').value;
+    const msg     = document.getElementById('fmsg').value;
+    const text    = encodeURIComponent(`Hola, soy ${name}${phone ? ` (${phone})` : ''}.\nAsunto: ${subject}\n${msg}`);
+    window.open(`https://wa.me/${WPP_NUMBER}?text=${text}`, '_blank');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (!links) return;
+    if (links.style.display === 'flex') {
+      links.style.display = 'none';
+    } else {
+      links.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:72px;left:0;right:0;background:rgba(10,5,0,0.98);padding:1.5rem 2rem;gap:1.5rem;border-bottom:1px solid rgba(201,162,39,0.2);';
+    }
+  }
+
+  // Initial render
+  renderMenu('all');
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
