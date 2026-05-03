@@ -1066,13 +1066,6 @@
   <h2 class="section-title reveal">Nuestros Combos</h2>
   <p class="section-desc reveal">Cada combo lleva el nombre de una ciudad italiana que lo inspiró. Todos incluyen papas fritas y gaseosa a elección.</p>
 
-  <div class="menu-filter reveal">
-    <button class="filter-btn active" onclick="filterMenu('all', this)">Todos</button>
-    <button class="filter-btn" onclick="filterMenu('clasico', this)">Clásicos</button>
-    <button class="filter-btn" onclick="filterMenu('especial', this)">Especiales</button>
-    <button class="filter-btn" onclick="filterMenu('doble', this)">Dobles</button>
-  </div>
-
   <div class="menu-grid" id="menuGrid">
     <!-- Cards generadas por JS -->
   </div>
@@ -1372,12 +1365,6 @@
     const grid = document.getElementById('menuGrid');
     const items = filter === 'all' ? menuItems : menuItems.filter(i => i.category === filter);
     grid.innerHTML = items.map(buildCard).join('');
-  }
-
-  function filterMenu(cat, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderMenu(cat);
   }
 
   // Modal
